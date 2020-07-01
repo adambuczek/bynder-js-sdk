@@ -329,6 +329,21 @@ class Bynder {
   }
 
   /**
+   * Get the download url of original file.
+   * @see {@link https://bynder.docs.apiary.io/#reference/download/download-operations/retrieve-asset-download-location|API Call}
+   * @param {Object} params - An object containing the parameters accepted by the API to change in the asset.
+   * @param {String} params.id - The id of the desired asset.
+   */
+  getMediaDownloadUrl({id, params} = {}) {
+    if (!id) {
+      return rejectValidation("media", "id");
+    }
+      return this.api.send('GET', `v4/media/${id}/download`, {
+          ...params
+      })
+  }
+
+  /**
    * Get the assets total according to the parameters provided.
    * @see {@link http://docs.bynder.apiary.io/#reference/assets/asset-operations/retrieve-assets|API Call}
    * @param {Object} [params={}] - An object containing the parameters accepted by the API to narrow the query.
